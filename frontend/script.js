@@ -1,4 +1,4 @@
-// Constantes e seleção do DOM
+// DOM
 const catalogoContainer = document.getElementById('catalogo-container');
 const modal = document.getElementById('modal');
 const closeModalBtn = document.getElementById('close-modal');
@@ -6,7 +6,7 @@ const modalTitle = document.getElementById('modal-title');
 const modalGenre = document.getElementById('modal-genre');
 const modalSummary = document.getElementById('modal-summary');
 
-// 1. Consumo de API (Buscando dados do nosso backend)
+// consumo API (busca dados do backend)
 async function buscarJogos() {
     try {
         const response = await fetch('https://catalogo-jogos-production.up.railway.app/api/jogos');
@@ -18,7 +18,7 @@ async function buscarJogos() {
     }
 }
 
-// 2. Manipulação do DOM
+// DOM
 function renderizarCatálogo(jogos) {
     catalogoContainer.innerHTML = ''; // Limpa o container
     
@@ -33,30 +33,27 @@ function renderizarCatálogo(jogos) {
             </div>
         `;
 
-        // 3. Eventos em JavaScript
+        // eventos Javas
         card.addEventListener('click', () => abrirModal(jogo));
         catalogoContainer.appendChild(card);
     });
 }
 
-// Funções para controle do Modal
 function abrirModal(jogo) {
     modalTitle.textContent = jogo.nome;
     modalGenre.textContent = jogo.genero;
     modalSummary.textContent = jogo.resumo;
-    modal.style.display = 'flex'; // Exibe usando flexbox
+    modal.style.display = 'flex'; 
 }
 
 closeModalBtn.addEventListener('click', () => {
     modal.style.display = 'none';
 });
 
-// Fechar modal ao clicar fora dele
 window.addEventListener('click', (evento) => {
     if (evento.target === modal) {
         modal.style.display = 'none';
     }
 });
 
-// Inicia a aplicação
 buscarJogos();

@@ -3,10 +3,9 @@ const mysql = require('mysql2');
 const cors = require('cors');
 
 const app = express();
-app.use(cors()); // Permite que o frontend consuma esta API
+app.use(cors()); // consumo da API
 app.use(express.json());
 
-// Conexão com o MySQL (ajuste usuário e senha para o seu ambiente)
 const db = mysql.createConnection({
     host: process.env.MYSQLHOST || 'seu-host-do-railway',
     user: process.env.MYSQLUSER || 'seu-usuario',
@@ -20,7 +19,7 @@ db.connect(err => {
     else console.log('Conectado ao MySQL com sucesso!');
 });
 
-// Endpoint da API que o frontend vai consumir
+// Endpoint q frontend vai consumir
 app.get('/api/jogos', (req, res) => {
     db.query('SELECT * FROM jogos', (err, results) => {
         if (err) return res.status(500).send(err);

@@ -9,7 +9,7 @@ const modalSummary = document.getElementById('modal-summary');
 // 1. Consumo de API (Buscando dados do nosso backend)
 async function buscarJogos() {
     try {
-        const response = await fetch('http://localhost:3000/api/jogos');
+        const response = await fetch('https://catalogo-jogos-production.up.railway.app/api/jogos');
         const jogos = await response.json();
         renderizarCatálogo(jogos);
     } catch (error) {

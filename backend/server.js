@@ -8,10 +8,11 @@ app.use(express.json());
 
 // Conexão com o MySQL (ajuste usuário e senha para o seu ambiente)
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '', // Insira sua senha do MySQL aqui
-    database: 'catalogo_jogos'
+    host: process.env.MYSQLHOST || 'seu-host-do-railway',
+    user: process.env.MYSQLUSER || 'seu-usuario',
+    password: process.env.MYSQLPASSWORD || 'sua-senha',
+    database: process.env.MYSQLDATABASE || 'catalogo_jogos',
+    port: process.env.MYSQLPORT || 3306
 });
 
 db.connect(err => {
@@ -27,6 +28,7 @@ app.get('/api/jogos', (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log('API rodando na porta 3000 (http://localhost:3000/api/jogos)');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`API rodando na porta ${PORT}`);
 });
